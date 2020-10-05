@@ -65,7 +65,7 @@ Once verified, continue with the below:
     <li><b>kubectl get deployments</b> should be empty.</li>
     <li>Test the docker image: <b>docker run -ti --rm -p 8080:8080 {url to image, gcr.io/...}</b></li>
     <li>You can use <b>Web Preview</b> again to test.</li>
-    <li>Deploy to cluster: <b>kubectl create deployment {application name} --image={url to image, gcr.io/...} --port=8080</b>. NOTE: 8080 is the port to expose.</li>
+    <li>Deploy to cluster: <b>kubectl create deployment {application name} --image={url to image, gcr.io/...} --port=8080</b> (eg: <b>kubectl create deployment spring-boot-deployment --image=gcr.io/spring-boot-application-291608/spring-boot-application:v1 --port=8080</b>. NOTE: 8080 is the port to expose.</li>
     <li>Check: <b>kubectl get deployments</b> should now list the deployment.</li>
     <li>Check: <b>kubectl get pods</b> should now list one pod.</li>
     <li>Check: <b>kubectl get services</b> should still be empty.</li>
@@ -73,7 +73,7 @@ Once verified, continue with the below:
 
 <h2 id="routing_traffic">Routing Traffic (Load Balancing)</h2>
 <ol>
-    <li>Run command: <b>kubectl expose deployment {deployment name} --type=LoadBalancer</b>.</li>
+    <li>Run command: <b>kubectl expose deployment spring-boot-deployment --type=LoadBalancer</b> or <b>kubectl expose deployment spring-boot-deployment --type=LoadBalancer --port=80 --target-port=8080</b> to set up port forwarding.</li>
     <li>Check: <b>kubectl get services</b> now shows the application with External IP being either <b>PENDING</b> or the <b>IP</b>.</li>
     <li>NOTE: Not included in these steps is the ability to create a DNS besides the IP.</li>
     <li>Service should now be accessible using the <b>External IP of the Load Balancer</b>.</li>

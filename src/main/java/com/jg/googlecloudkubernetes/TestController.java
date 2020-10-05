@@ -10,6 +10,7 @@ public class TestController {
 
     @GetMapping("/test")
     public String test() {
+        log.info("Endpoint accessed.");
         return "Hello World!";
     }
 }
